@@ -5,20 +5,6 @@ import jwt from 'jsonwebtoken';
 declare module 'fastify' {
   interface FastifyInstance {
     /**
-     * Generates both the user access token and refresh token
-     * @param userId The ID of the user to include in the payload of the token
-     * @returns The access token for the user
-     */
-    generateAccessToken: (userId: string) => string;
-
-    /**
-     * Method that verifies if an access token is valid and returns the info inside the token
-     * @param token An access token for a user
-     * @returns An object with the `uid` contained in the token
-     */
-    verifyUserToken: (token: string) => { uid: string };
-
-    /**
      * Method to convert any payload into a JWT
      * @param payload The content to convert into a JWT
      * @param config The configs to pass to `jwt.sign`
@@ -47,15 +33,6 @@ interface JwtManagerOptions {
 }
 
 const jwtManager: FastifyPluginCallback<JwtManagerOptions> = (app, options, done) => {
-  app.decorate('generateAccessToken', (uid: string) => {
-    const token = jwt.sign({ uid }, options.secret, { expiresIn: '5m' });
-    return token;
-  });
-
-  app.decorate('verifyUserToken', (token: string) => {
-    return jwt.verify(token, options.secret) as { uid: string };
-  });
-
   app.decorate('tokenizeJwt', (payload: any, config?: jwt.SignOptions) => {
     const token = jwt.sign(payload, options.secret, config);
     return token;
