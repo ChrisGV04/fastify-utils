@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.2.0](https://github.com/ChrisGV04/fastify-utils/compare/0.1.1...0.2.0) (2024-06-26)
+
 ## [0.1.1](https://github.com/ChrisGV04/fastify-utils/compare/0.1.0...0.1.1) (2024-03-06)
 
 ## 0.1.0 (2024-03-06)
