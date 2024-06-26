@@ -6,7 +6,8 @@ export function errorHandler(error: any, request: FastifyRequest, reply: Fastify
     return reply.status(error.statusCode).send({ error: error.serializeError() });
   }
 
-  request.log.error('Unknown error:', error);
+  request.log.error(error, "Unknown error:");
+  
   reply
     .status(500)
     .send(
